@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-
 const imagenesLocales = {
   // Juegos
   'elden_ring.png': require('../assets/elden_ring.png'),
@@ -30,44 +29,41 @@ const imagenesLocales = {
   'xbox_elite.png': require('../assets/xbox_elite.png'),
   'razer_kishi.png': require('../assets/razer_kishi.png'),
 };
-
-export default function GameCard({ title, price, category, image }) {
+export default function GameCard({ title, price, category, image, onAddToCart }) {
   const imagenLocal = imagenesLocales[image];
-
   return (
     <View style={styles.card}>
       <View style={[styles.imageContainer, !imagenLocal && styles.imagePlaceholder]}>
         {imagenLocal ? (
-          <Image 
-            source={imagenLocal} 
+          <Image
+            source={imagenLocal}
             style={styles.cardImage}
             resizeMode="cover"
           />
         ) : (
-          <Text style={{color: '#555', fontSize: 10}}>SIN IMAGEN</Text>
+          <Text style={{ color: '#555', fontSize: 10 }}>SIN IMAGEN</Text>
         )}
       </View>
 
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.category}>{category}</Text>
       <Text style={styles.price}>S/ {price}</Text>
-      <TouchableOpacity style={styles.buyButton}>
+      <TouchableOpacity style={styles.buyButton} onPress={onAddToCart}>
         <Text style={styles.buyText}>Añadir</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  card: { 
-    backgroundColor: '#1e1e1e', 
+  card: {
+    backgroundColor: '#1e1e1e',
     width: '48%', // Diseño responsivo: permite mostrar 2 columnas adaptables
-    padding: 10, 
-    borderRadius: 15, 
-    marginBottom: 15, 
-    borderWidth: 1, 
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 15,
+    borderWidth: 1,
     borderColor: '#444',
-    justifyContent: 'space-between' // Flexbox: distribuye el contenido verticalmente
+    justifyContent: 'space-between', // Flexbox: distribuye el contenido verticalmente
   },
   imageContainer: {
     width: '100%', // Responsivo: ocupa todo el ancho de la tarjeta
@@ -76,42 +72,42 @@ const styles = StyleSheet.create({
     overflow: 'hidden', // Usabilidad: evita que la imagen se salga del contenedor
     marginBottom: 10,
   },
-  cardImage: { 
+  cardImage: {
     width: '100%', // Responsivo: imagen se adapta al contenedor
     height: '100%',
   },
   imagePlaceholder: {
-    backgroundColor: '#333', 
+    backgroundColor: '#333',
     justifyContent: 'center', // Flexbox: centra contenido verticalmente
     alignItems: 'center', // Flexbox: centra contenido horizontalmente
   },
-  title: { 
+  title: {
     color: '#fff', // Usabilidad: texto claro y legible
-    fontWeight: 'bold', 
-    fontSize: 14, 
-    marginBottom: 2 
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 2,
   },
-  category: { 
+  category: {
     color: '#00d4ff', // Usabilidad: diferencia visual de categoría
-    fontSize: 10, 
-    marginBottom: 5 
+    fontSize: 10,
+    marginBottom: 5,
   },
-  price: { 
+  price: {
     color: '#fff', // Usabilidad: resalta información importante (precio)
-    fontSize: 16, 
-    fontWeight: 'bold', 
-    marginTop: 'auto' // Flexbox: empuja el precio al final de la tarjeta
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 'auto', // Flexbox: empuja el precio al final de la tarjeta
   },
-  buyButton: { 
+  buyButton: {
     backgroundColor: '#00d4ff', // Usabilidad: botón llamativo para acción
-    marginTop: 10, 
-    padding: 5, 
-    borderRadius: 5, 
-    alignItems: 'center' // Flexbox: centra el texto del botón
+    marginTop: 10,
+    padding: 5,
+    borderRadius: 5,
+    alignItems: 'center', // Flexbox: centra el texto del botón
   },
-  buyText: { 
+  buyText: {
     color: '#000', // Usabilidad: contraste para buena lectura
-    fontWeight: 'bold', 
-    fontSize: 12 
-  }
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
 });
